@@ -1,0 +1,32 @@
+@use '../../styles/variables' as *;
+
+.countries-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  
+  @media (min-width: $tablet) {
+    padding: 3rem 2rem;
+  }
+}
+
+.layout-header {
+  margin-bottom: 3rem;
+  
+  h1 {
+    font-size: 2rem;
+    color: $text-main;
+    font-weight: 800;
+    
+    @media (min-width: $tablet) {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding-bottom: 3rem;
+}
