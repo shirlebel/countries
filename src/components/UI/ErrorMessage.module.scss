@@ -1,0 +1,9 @@
+@use '../../styles/variables' as *;
+
+.error-message {
+  text-align: center;
+  padding: 2rem;
+  color: #e57373;
+  font-size: 1.2rem;
+}
+

@@ -4,26 +4,29 @@ export const useInfiniteScroll = (callback: () => void) => {
   const observerTarget = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const element = observerTarget.current;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           callback();
         }
       },
-      { threshold: 1.0 }
+      { 
+        threshold: 0.1, // Trigger as soon as even 10% of the trigger is visible
+        rootMargin: '400px' // Start loading 400px before reaching the bottom
+      }
     );
 
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      if (observerTarget.current) {
-        observer.unobserve(observerTarget.current);
+      if (element) {
+        observer.unobserve(element);
       }
     };
   }, [callback]);
 
   return observerTarget;
 };
-

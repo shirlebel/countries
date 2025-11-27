@@ -41,12 +41,12 @@ export const useCountries = () => {
     loadCountries();
   }, []);
 
-  // Reset Page on Filter Change
+  // Reset Page on filter Change
   useEffect(() => {
     setPage(1);
   }, [debouncedSearchQuery, sortOption]);
 
-  // Filter & Sort Logic
+  // Filter & Sort logic
   const filteredCountries = useMemo(() => {
     let result = [...countries];
 
@@ -62,7 +62,7 @@ export const useCountries = () => {
     return result;
   }, [countries, debouncedSearchQuery, sortOption]);
 
-  // Pagination Logic
+  // Pagination logic
   const visibleCountries = useMemo(() => {
     return filteredCountries.slice(0, page * ITEMS_PER_PAGE);
   }, [filteredCountries, page]);

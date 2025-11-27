@@ -7,6 +7,9 @@ import { CountryCard } from './components/CountryCard/CountryCard';
 import { Loader } from './components/UI/Loader';
 import { ErrorMessage } from './components/UI/ErrorMessage';
 import './styles/global.scss';
+import styles from './components/Layout/Layout.module.scss';
+
+const NO_RESULTS_MESSAGE = "No countries found matching your criteria.";
 
 const App: React.FC = () => {
   const { 
@@ -23,20 +26,25 @@ const App: React.FC = () => {
 
   const observerTarget = useInfiniteScroll(loadMore);
 
+  const hasData = countries.length > 0;
+  const isError = !!error;
+  const showLoader = loading;
+  const showContent = !loading && !isError;
+
   return (
     <Layout>
-      <Controls 
+      <Controls
         searchQuery={searchQuery} 
         setSearchQuery={setSearchQuery}
         sortOption={sortOption}
         setSortOption={setSortOption}
       />
 
-      {loading && <Loader />}
+      {showLoader && <Loader />}
       
-      {error && <ErrorMessage message={error} />}
+      {isError && <ErrorMessage message={error} />}
 
-      {!loading && !error && (
+      {showContent && hasData && (
         <>
           <Grid>
             {countries.map((country, index) => (
@@ -45,13 +53,13 @@ const App: React.FC = () => {
           </Grid>
           
           {countries.length < totalCount && (
-            <div ref={observerTarget} style={{ height: '20px', margin: '20px 0' }} />
+            <div ref={observerTarget} className={styles['infinite-scroll-trigger']} />
           )}
         </>
       )}
 
-      {!loading && !error && countries.length === 0 && (
-        <ErrorMessage message="No countries found matching your criteria." />
+      {showContent && !hasData && (
+        <ErrorMessage message={NO_RESULTS_MESSAGE} />
       )}
     </Layout>
   );

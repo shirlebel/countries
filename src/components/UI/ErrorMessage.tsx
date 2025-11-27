@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './ErrorMessage.module.scss';
 
 interface ErrorMessageProps {
   message: string;
@@ -6,14 +7,8 @@ interface ErrorMessageProps {
 
 export const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
   return (
-    <div style={{ 
-      textAlign: 'center', 
-      padding: '2rem', 
-      color: '#e57373',
-      fontSize: '1.2rem'
-    }}>
+    <div className={styles['error-message']}>
       {message}
     </div>
   );
 };
-

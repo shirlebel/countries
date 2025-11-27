@@ -1,4 +1,4 @@
-# Countries App
+# Countries App 🌍
 
 A responsive dashboard to browse, search, and sort country data. Built with React, TypeScript, and SCSS Modules.
 

@@ -7,6 +7,12 @@ interface CountryCardProps {
   index: number;
 }
 
+const LABELS = {
+  CAPITAL: 'Capital:',
+  POPULATION: 'Population:',
+  NA: 'N/A'
+};
+
 export const CountryCard: React.FC<CountryCardProps> = ({ country, index }) => {
   const { name, capital, population, flags } = country;
 
@@ -15,7 +21,7 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country, index }) => {
   return (
     <article 
       className={styles['countries-card']} 
-      style={{ animationDelay }}
+      style={{ '--animation-delay': animationDelay } as React.CSSProperties}
     >
       <div className={styles['card-image-wrapper']}>
         <img src={flags.png} alt={flags.alt || `Flag of ${name.common}`} loading="lazy" />
@@ -23,13 +29,12 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country, index }) => {
       <div className={styles['card-content']}>
         <h3>{name.common}</h3>
         <p>
-          <strong>Capital:</strong> {capital?.[0] || 'N/A'}
+          <strong>{LABELS.CAPITAL}</strong> {capital?.[0] || LABELS.NA}
         </p>
         <p>
-          <strong>Population:</strong> {population.toLocaleString()}
+          <strong>{LABELS.POPULATION}</strong> {population.toLocaleString()}
         </p>
       </div>
     </article>
   );
 };
-

@@ -9,6 +9,20 @@ interface ControlsProps {
   setSortOption: (option: SortOption) => void;
 }
 
+const PLACEHOLDERS = {
+  SEARCH: "Search for a country...",
+  SORT_LABEL: "Sort countries",
+  SEARCH_LABEL: "Search countries",
+  CLEAR_SEARCH: "Clear search"
+};
+
+const SORT_OPTIONS = {
+  NAME_ASC: "Name (A-Z)",
+  NAME_DESC: "Name (Z-A)",
+  POP_DESC: "Population (High to Low)",
+  POP_ASC: "Population (Low to High)"
+};
+
 export const Controls: React.FC<ControlsProps> = ({ 
   searchQuery, 
   setSearchQuery, 
@@ -20,16 +34,16 @@ export const Controls: React.FC<ControlsProps> = ({
       <div className={styles['controls-search-wrapper']}>
         <input
           type="text"
-          placeholder="Search for a country..."
+          placeholder={PLACEHOLDERS.SEARCH}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          aria-label="Search countries"
+          aria-label={PLACEHOLDERS.SEARCH_LABEL}
         />
         {searchQuery && (
           <button 
             className={styles['controls-clear-button']} 
             onClick={() => setSearchQuery('')}
-            aria-label="Clear search"
+            aria-label={PLACEHOLDERS.CLEAR_SEARCH}
           >
             ✕
           </button>
@@ -39,12 +53,12 @@ export const Controls: React.FC<ControlsProps> = ({
         <select 
           value={sortOption} 
           onChange={(e) => setSortOption(e.target.value as SortOption)}
-          aria-label="Sort countries"
+          aria-label={PLACEHOLDERS.SORT_LABEL}
         >
-          <option value="name-asc">Name (A-Z)</option>
-          <option value="name-desc">Name (Z-A)</option>
-          <option value="pop-desc">Population (High to Low)</option>
-          <option value="pop-asc">Population (Low to High)</option>
+          <option value="name-asc">{SORT_OPTIONS.NAME_ASC}</option>
+          <option value="name-desc">{SORT_OPTIONS.NAME_DESC}</option>
+          <option value="pop-desc">{SORT_OPTIONS.POP_DESC}</option>
+          <option value="pop-asc">{SORT_OPTIONS.POP_ASC}</option>
         </select>
       </div>
     </div>
